@@ -7,16 +7,7 @@ import BreezeNavLink from '@/Components/NavLink.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
-// import jQuery from '@/vendor/jquery/jquery';
-// import { bootstrap } from '@/vendor/bootstrap/js/bootstrap.bundle';
-// import { jQueryEasing } from '@/vendor/jquery-easing/jquery.easing';
-// import { sbAdmin } from '@/sb-admin-2';
-// import { chart } from '@/vendor/chart.js/Chart';
-// import { chartAreaDemo} from '@/demo/chart-area-demo';
-// import  {chartPieDemo} from '@/demo/chart-pie-demo';
 
-
-// const showingNavigationDropdown = ref(false);
 
 export default {
     components: {
@@ -28,9 +19,7 @@ BreezeResponsiveNavLink,
 Link
     },
       created (){
-        //   let script = document.createElement('script');
-        //   script.setAttribute('src', '/template/scripts.js');
-        //   document.body.appendChild(script);
+
       }
   }
 
@@ -176,6 +165,11 @@ Link
                 <a class="nav-link active" href="/view">
                     <i class="fas fa-fw fa-code-branch"></i>
                     <span>Branches</span></a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link active" href="/reports">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Reports</span></a>
             </li>
 
             <!-- Nav Item - Tables -->

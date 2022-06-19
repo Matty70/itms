@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Branch;
+use App\Models\Report;
 use App\Models\Employee;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard',['branches' => Branch::all(),'employees'=>Employee::all()]);
+    return Inertia::render('Dashboard',['branches' => Branch::all(),'employees'=>Employee::all(),'reports' => Report::all()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
@@ -43,3 +44,5 @@ Route::get('/view', 'App\Http\Controllers\BranchController@viewBranches')->middl
 Route::Post('/branch', 'App\Http\Controllers\BranchController@store' )->name('branch.store');
 Route::put('/create/branch/{branchId}', 'App\Http\Controllers\BranchController@createBranch')->name('view.branch');
 Route::delete('/delete/branch/{branchId}','App\Http\Controllers\BranchController@deleteBranch')->name('branch.delete');
+
+Route::get('/reports', 'App\Http\Controllers\ReportController@showReports');
