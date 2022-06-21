@@ -92,8 +92,8 @@ class BranchController extends Controller
 
     public function viewBranches(){
         $branches = Branch::all();
-        ;
-    return Inertia::render("Branch",['branches' => $branches ]);
+
+        return Inertia::render("Branch",['branches' => $branches ]);
 
     }
 }

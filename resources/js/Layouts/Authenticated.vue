@@ -25,9 +25,11 @@ Link
 
 </script>
 <style>
+
 @import  '../../css/sb-admin-2.min.css';
 @import '../vendor/fontawesome-free/css/all.min.css';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
 </style>
 
 <template>

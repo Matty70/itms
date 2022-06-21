@@ -2,6 +2,7 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import { Chart, registerables } from "chart.js";
+
 // import LineChart from '@/Components/Chart.vue';
 
 export default {
@@ -9,16 +10,25 @@ export default {
     BreezeAuthenticatedLayout,
     Head,
     // LineChart,
-  },
+    },
+
+
 
   props: {
     branches: Array,
     employees: Array,
-    reports: Array
+    reports: Array,
+    temperatures: Array
     // chartdata
   },
   created() {},
   mounted() {
+
+     this.temperatures.forEach((temp) => {
+            labels.push(temp.created_at);
+            data.push(temp.temperature);
+        }
+        )
     console.log("mounted");
     Chart.register(...registerables);
     // Area Chart Example
@@ -26,20 +36,7 @@ export default {
     this.myLineChart = new Chart(this.$refs.chart, {
       type: "line",
       data: {
-        labels: [
-          "0 Mins",
-          "30 Mins",
-          "1 Hrs",
-          "1.5 Hrs.",
-          "2 Hrs",
-          "2.5 Hrs",
-          "3 Hrs",
-          "3.5 Hrs",
-          "4 Hrs",
-          "4.5 Hrs",
-          "5 Hrs",
-          "5.5 Hrs",
-        ],
+        labels: this.lables,
         datasets: [
           {
             label: "Centigrade",
@@ -54,7 +51,7 @@ export default {
             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
             pointHitRadius: 5,
             pointBorderWidth: 2,
-            data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100],
+            data: this.data,
           },
         ],
       },
@@ -136,20 +133,7 @@ export default {
     return {
       myLineChart: {},
       chartData: {
-        labels: [
-          "0 Mins",
-          "30 Mins",
-          "1 Hrs",
-          "1.5 Hrs.",
-          "2 Hrs",
-          "2.5 Hrs",
-          "3 Hrs",
-          "3.5 Hrs",
-          "4 Hrs",
-          "4.5 Hrs",
-          "5 Hrs",
-          "5.5 Hrs",
-        ],
+        labels: [],
         datasets: [
           {
             label: "Centigrade",
@@ -164,7 +148,7 @@ export default {
             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
             pointHitRadius: 5,
             pointBorderWidth: 2,
-            data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100],
+            data: [],
           },
         ],
       },

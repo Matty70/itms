@@ -12,7 +12,8 @@ export default {
 
     props: {
         employees: Array,
-        branches: Array
+        branches: Array,
+
     },
       created (){
 
@@ -40,7 +41,9 @@ export default {
     }),
     });
 },
-      }
+    }
+
+    
   }
 
 

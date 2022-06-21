@@ -15441,12 +15441,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteBranch: function deleteBranch() {
       console.log("mmmm");
-      var button = $(event.relatedTarget); // Button that triggered the modal
+      var button = $(Event.relatedTarget); // Button that triggered the modal
 
       var branch = button.data("branch"); // Extract info from data-* attributes
       // // var branch_ = button.data('user_name')
 
-      console.log(branch); //   this.form.delete(route("branch.delete", "2"), {
+      console.log(branch); //   this.form.delete(route("branch.delete", branch), {
       //     onFinish: () =>
       //       this.$nextTick(() => {
       //         this.$bvModal.hide("deleteBranch");
@@ -15457,6 +15457,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       console.log("edit");
+      var button = $(event.relatedTarget);
+      var branch = button.data("branch");
       this.form(route("view.branch", $branchId), {
         onFinish: function onFinish() {
           return _this2.$nextTick(function () {
@@ -15509,11 +15511,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   props: {
     branches: Array,
     employees: Array,
-    reports: Array // chartdata
+    reports: Array,
+    temperatures: Array // chartdata
 
   },
   created: function created() {},
   mounted: function mounted() {
+    this.temperatures.forEach(function (temp) {
+      labels.push(temp.created_at);
+      data.push(temp.temperature);
+    });
     console.log("mounted");
     chart_js__WEBPACK_IMPORTED_MODULE_2__.Chart.register.apply(chart_js__WEBPACK_IMPORTED_MODULE_2__.Chart, _toConsumableArray(chart_js__WEBPACK_IMPORTED_MODULE_2__.registerables)); // Area Chart Example
     // var ctx = document.getElementById("myAreaChart");
@@ -15521,7 +15528,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.myLineChart = new chart_js__WEBPACK_IMPORTED_MODULE_2__.Chart(this.$refs.chart, {
       type: "line",
       data: {
-        labels: ["0 Mins", "30 Mins", "1 Hrs", "1.5 Hrs.", "2 Hrs", "2.5 Hrs", "3 Hrs", "3.5 Hrs", "4 Hrs", "4.5 Hrs", "5 Hrs", "5.5 Hrs"],
+        labels: this.lables,
         datasets: [{
           label: "Centigrade",
           lineTension: 0.3,
@@ -15535,7 +15542,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 2,
-          data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100]
+          data: this.data
         }]
       },
       options: {
@@ -15610,7 +15617,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return {
       myLineChart: {},
       chartData: {
-        labels: ["0 Mins", "30 Mins", "1 Hrs", "1.5 Hrs.", "2 Hrs", "2.5 Hrs", "3 Hrs", "3.5 Hrs", "4 Hrs", "4.5 Hrs", "5 Hrs", "5.5 Hrs"],
+        labels: [],
         datasets: [{
           label: "Centigrade",
           lineTension: 0.3,
@@ -15624,7 +15631,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 2,
-          data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100]
+          data: []
         }]
       },
       chartOptions: {
@@ -15797,7 +15804,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   props: {
     reports: Array,
     branches: Array,
-    employees: Array // chartdata
+    employees: Array,
+    temperatures: Array // chartdata
 
   },
   created: function created() {},
@@ -15809,7 +15817,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.myLineChart = new chart_js__WEBPACK_IMPORTED_MODULE_3__.Chart(this.$refs.chart, {
       type: "line",
       data: {
-        labels: ["0 Mins", "30 Mins", "1 Hrs", "1.5 Hrs.", "2 Hrs", "2.5 Hrs", "3 Hrs", "3.5 Hrs", "4 Hrs", "4.5 Hrs", "5 Hrs", "5.5 Hrs"],
+        labels: [,],
         datasets: [{
           label: "Centigrade",
           lineTension: 0.3,
@@ -15823,7 +15831,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 2,
-          data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100]
+          data: []
         }]
       },
       options: {
@@ -15894,95 +15902,114 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     }); // this.renderChart(myLineChart.data, myLineChart.options);
   },
-  data: function data() {
-    return {
-      myLineChart: {},
-      chartData: {
-        labels: ["0 Mins", "30 Mins", "1 Hrs", "1.5 Hrs.", "2 Hrs", "2.5 Hrs", "3 Hrs", "3.5 Hrs", "4 Hrs", "4.5 Hrs", "5 Hrs", "5.5 Hrs"],
-        datasets: [{
-          label: "Centigrade",
-          lineTension: 0.3,
-          backgroundColor: "rgba(78, 115, 223, 0.05)",
-          borderColor: "rgba(78, 115, 223, 1)",
-          pointRadius: 3,
-          pointBackgroundColor: "rgba(78, 115, 223, 1)",
-          pointBorderColor: "rgba(78, 115, 223, 1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 2,
-          data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100]
-        }]
-      },
-      chartOptions: {
-        maintainAspectRatio: false,
-        layout: {
-          padding: {
-            left: 10,
-            right: 25,
-            top: 25,
-            bottom: 0
-          }
-        },
-        scales: {
-          xAxes: [{
-            time: {
-              unit: "date"
-            },
-            gridLines: {
-              display: false,
-              drawBorder: false
-            },
-            ticks: {
-              maxTicksLimit: 7
-            }
-          }],
-          yAxes: [{
-            ticks: {
-              maxTicksLimit: 5,
-              padding: 10,
-              // Include a dollar sign in the ticks
-              callback: function callback(value, index, values) {
-                return number_format(value) + "°C";
-              }
-            },
-            gridLines: {
-              color: "rgb(234, 236, 244)",
-              zeroLineColor: "rgb(234, 236, 244)",
-              drawBorder: false,
-              borderDash: [2],
-              zeroLineBorderDash: [2]
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        tooltips: {
-          backgroundColor: "rgb(255,255,255)",
-          bodyFontColor: "#858796",
-          titleMarginBottom: 10,
-          titleFontColor: "#6e707e",
-          titleFontSize: 14,
-          borderColor: "#dddfeb",
-          borderWidth: 1,
-          xPadding: 15,
-          yPadding: 15,
-          displayColors: false,
-          intersect: false,
-          mode: "index",
-          caretPadding: 10,
-          callbacks: {
-            label: function label(tooltipItem, chart) {
-              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
-              return datasetLabel + ": °C" + number_format(tooltipItem.yLabel);
-            }
-          }
-        }
-      }
-    };
-  },
+  //   data() {
+  //     return {
+  //       myLineChart: {},
+  //       chartData: {
+  //         labels: [
+  //           "0 Mins",
+  //           "30 Mins",
+  //           "1 Hrs",
+  //           "1.5 Hrs.",
+  //           "2 Hrs",
+  //           "2.5 Hrs",
+  //           "3 Hrs",
+  //           "3.5 Hrs",
+  //           "4 Hrs",
+  //           "4.5 Hrs",
+  //           "5 Hrs",
+  //           "5.5 Hrs",
+  //         ],
+  //         datasets: [
+  //           {
+  //             label: "Centigrade",
+  //             lineTension: 0.3,
+  //             backgroundColor: "rgba(78, 115, 223, 0.05)",
+  //             borderColor: "rgba(78, 115, 223, 1)",
+  //             pointRadius: 3,
+  //             pointBackgroundColor: "rgba(78, 115, 223, 1)",
+  //             pointBorderColor: "rgba(78, 115, 223, 1)",
+  //             pointHoverRadius: 3,
+  //             pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+  //             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+  //             pointHitRadius: 5,
+  //             pointBorderWidth: 2,
+  //             data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100],
+  //           },
+  //         ],
+  //       },
+  //       chartOptions: {
+  //         maintainAspectRatio: false,
+  //         layout: {
+  //           padding: {
+  //             left: 10,
+  //             right: 25,
+  //             top: 25,
+  //             bottom: 0,
+  //           },
+  //         },
+  //         scales: {
+  //           xAxes: [
+  //             {
+  //               time: {
+  //                 unit: "date",
+  //               },
+  //               gridLines: {
+  //                 display: false,
+  //                 drawBorder: false,
+  //               },
+  //               ticks: {
+  //                 maxTicksLimit: 7,
+  //               },
+  //             },
+  //           ],
+  //           yAxes: [
+  //             {
+  //               ticks: {
+  //                 maxTicksLimit: 5,
+  //                 padding: 10,
+  //                 // Include a dollar sign in the ticks
+  //                 callback: function (value, index, values) {
+  //                   return number_format(value) + "°C";
+  //                 },
+  //               },
+  //               gridLines: {
+  //                 color: "rgb(234, 236, 244)",
+  //                 zeroLineColor: "rgb(234, 236, 244)",
+  //                 drawBorder: false,
+  //                 borderDash: [2],
+  //                 zeroLineBorderDash: [2],
+  //               },
+  //             },
+  //           ],
+  //         },
+  //         legend: {
+  //           display: false,
+  //         },
+  //         tooltips: {
+  //           backgroundColor: "rgb(255,255,255)",
+  //           bodyFontColor: "#858796",
+  //           titleMarginBottom: 10,
+  //           titleFontColor: "#6e707e",
+  //           titleFontSize: 14,
+  //           borderColor: "#dddfeb",
+  //           borderWidth: 1,
+  //           xPadding: 15,
+  //           yPadding: 15,
+  //           displayColors: false,
+  //           intersect: false,
+  //           mode: "index",
+  //           caretPadding: 10,
+  //           callbacks: {
+  //             label: function (tooltipItem, chart) {
+  //               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
+  //               return datasetLabel + ": °C" + number_format(tooltipItem.yLabel);
+  //             },
+  //           },
+  //         },
+  //       },
+  //     };
+  //   },
   methods: {}
 });
 
@@ -17716,19 +17743,22 @@ var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_35 = {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "modal-footer"
-};
-
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "button",
   "class": "btn btn-default",
   "data-dismiss": "modal",
   value: "Cancel"
-}, null, -1
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "submit",
+  "class": "btn btn-danger",
+  value: "Delete"
+})], -1
 /* HOISTED */
 );
 
+var _hoisted_36 = [_hoisted_33, _hoisted_34, _hoisted_35];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -17805,17 +17835,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.location]])])]), _hoisted_29], 32
       /* HYDRATE_EVENTS */
       )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete Modal HTML "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.deleteBranch && $options.deleteBranch.apply($options, arguments);
         }, ["prevent"]))
-      }, [_hoisted_33, _hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "submit",
-        "class": "btn btn-danger",
-        value: "Delete",
-        onClick: _cache[7] || (_cache[7] = function () {
-          return $options.deleteBranch && $options.deleteBranch.apply($options, arguments);
-        })
-      })])], 32
+      }, _hoisted_36, 32
       /* HYDRATE_EVENTS */
       )])])])])];
     }),
@@ -18527,8 +18550,12 @@ var _hoisted_6 = {
 var _hoisted_7 = {
   "class": "chart-area"
 };
+var _hoisted_8 = {
+  id: "myAreaChart",
+  ref: "chart"
+};
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "user-card__info"
 }, null, -1
 /* HOISTED */
@@ -18539,17 +18566,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BreezeAuthenticatedLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)([0, 1, 2], function (item, i) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("canvas", {
-          id: "myAreaChart",
-          ref_for: true,
-          ref: "chart"
-        }, null, 512
-        /* NEED_PATCH */
-        )])]), _hoisted_8])])])]);
-      }), 64
-      /* STABLE_FRAGMENT */
-      ))])];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("canvas", _hoisted_8, null, 512
+      /* NEED_PATCH */
+      )])]), _hoisted_9])])])])])];
     }),
     _: 1
     /* STABLE */
@@ -39338,7 +39357,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_u
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_vendor_fontawesome_free_css_all_min_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/icon?family=Material+Icons);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

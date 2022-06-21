@@ -10,7 +10,9 @@ export default {
     BreezeValidationErrors,
   },
   props: {
-    branches: Array,
+      branches: Array,
+
+
   },
   created() {},
   data() {
@@ -34,19 +36,21 @@ export default {
 
     deleteBranch() {
       console.log("mmmm");
-      var button = $(event.relatedTarget); // Button that triggered the modal
+      var button = $(Event.relatedTarget); // Button that triggered the modal
       var branch = button.data("branch"); // Extract info from data-* attributes
       // // var branch_ = button.data('user_name')
       console.log(branch);
-      //   this.form.delete(route("branch.delete", "2"), {
-      //     onFinish: () =>
-      //       this.$nextTick(() => {
-      //         this.$bvModal.hide("deleteBranch");
-      //       }),
-      //   });
+    //   this.form.delete(route("branch.delete", branch), {
+    //     onFinish: () =>
+    //       this.$nextTick(() => {
+    //         this.$bvModal.hide("deleteBranch");
+    //       }),
+    //   });
     },
     edit() {
       console.log("edit");
+      var button = $(event.relatedTarget);
+      var branch = button.data("branch");
       this.form(route("view.branch", $branchId), {
         onFinish: () =>
           this.$nextTick(() => {
@@ -125,10 +129,16 @@ export default {
         <div class="clearfix">
           <div class="hint-text">Showing <b>1</b> out of <b>2</b> entries</div>
           <ul class="pagination">
-            <li class="page-item disabled"><a href="#">Previous</a></li>
-            <li class="page-item"><a href="#" class="page-link">1</a></li>
+            <li class="page-item disabled">
+              <a href="#">Previous</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">1</a>
+            </li>
 
-            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+            <li class="page-item">
+              <a href="#" class="page-link">Next</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -260,7 +270,7 @@ export default {
                   type="submit"
                   class="btn btn-danger"
                   value="Delete"
-                  @click="deleteBranch"
+
                 />
               </div>
             </form>

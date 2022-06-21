@@ -13,8 +13,9 @@ export default {
 
      props: {
          reports: Array,
-      branches: Array,
-    employees: Array,
+         branches: Array,
+         employees: Array,
+         temperatures: Array
 
     // chartdata
     },
@@ -28,18 +29,7 @@ export default {
       type: "line",
       data: {
         labels: [
-          "0 Mins",
-          "30 Mins",
-          "1 Hrs",
-          "1.5 Hrs.",
-          "2 Hrs",
-          "2.5 Hrs",
-          "3 Hrs",
-          "3.5 Hrs",
-          "4 Hrs",
-          "4.5 Hrs",
-          "5 Hrs",
-          "5.5 Hrs",
+         ,
         ],
         datasets: [
           {
@@ -55,7 +45,7 @@ export default {
             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
             pointHitRadius: 5,
             pointBorderWidth: 2,
-            data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100],
+            data: [],
           },
         ],
       },
@@ -133,114 +123,114 @@ export default {
 
     // this.renderChart(myLineChart.data, myLineChart.options);
   },
-  data() {
-    return {
-      myLineChart: {},
-      chartData: {
-        labels: [
-          "0 Mins",
-          "30 Mins",
-          "1 Hrs",
-          "1.5 Hrs.",
-          "2 Hrs",
-          "2.5 Hrs",
-          "3 Hrs",
-          "3.5 Hrs",
-          "4 Hrs",
-          "4.5 Hrs",
-          "5 Hrs",
-          "5.5 Hrs",
-        ],
-        datasets: [
-          {
-            label: "Centigrade",
-            lineTension: 0.3,
-            backgroundColor: "rgba(78, 115, 223, 0.05)",
-            borderColor: "rgba(78, 115, 223, 1)",
-            pointRadius: 3,
-            pointBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointBorderColor: "rgba(78, 115, 223, 1)",
-            pointHoverRadius: 3,
-            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-            pointHitRadius: 5,
-            pointBorderWidth: 2,
-            data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100],
-          },
-        ],
-      },
-      chartOptions: {
-        maintainAspectRatio: false,
-        layout: {
-          padding: {
-            left: 10,
-            right: 25,
-            top: 25,
-            bottom: 0,
-          },
-        },
-        scales: {
-          xAxes: [
-            {
-              time: {
-                unit: "date",
-              },
-              gridLines: {
-                display: false,
-                drawBorder: false,
-              },
-              ticks: {
-                maxTicksLimit: 7,
-              },
-            },
-          ],
-          yAxes: [
-            {
-              ticks: {
-                maxTicksLimit: 5,
-                padding: 10,
-                // Include a dollar sign in the ticks
-                callback: function (value, index, values) {
-                  return number_format(value) + "°C";
-                },
-              },
-              gridLines: {
-                color: "rgb(234, 236, 244)",
-                zeroLineColor: "rgb(234, 236, 244)",
-                drawBorder: false,
-                borderDash: [2],
-                zeroLineBorderDash: [2],
-              },
-            },
-          ],
-        },
-        legend: {
-          display: false,
-        },
-        tooltips: {
-          backgroundColor: "rgb(255,255,255)",
-          bodyFontColor: "#858796",
-          titleMarginBottom: 10,
-          titleFontColor: "#6e707e",
-          titleFontSize: 14,
-          borderColor: "#dddfeb",
-          borderWidth: 1,
-          xPadding: 15,
-          yPadding: 15,
-          displayColors: false,
-          intersect: false,
-          mode: "index",
-          caretPadding: 10,
-          callbacks: {
-            label: function (tooltipItem, chart) {
-              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
-              return datasetLabel + ": °C" + number_format(tooltipItem.yLabel);
-            },
-          },
-        },
-      },
-    };
-  },
+//   data() {
+//     return {
+//       myLineChart: {},
+//       chartData: {
+//         labels: [
+//           "0 Mins",
+//           "30 Mins",
+//           "1 Hrs",
+//           "1.5 Hrs.",
+//           "2 Hrs",
+//           "2.5 Hrs",
+//           "3 Hrs",
+//           "3.5 Hrs",
+//           "4 Hrs",
+//           "4.5 Hrs",
+//           "5 Hrs",
+//           "5.5 Hrs",
+//         ],
+//         datasets: [
+//           {
+//             label: "Centigrade",
+//             lineTension: 0.3,
+//             backgroundColor: "rgba(78, 115, 223, 0.05)",
+//             borderColor: "rgba(78, 115, 223, 1)",
+//             pointRadius: 3,
+//             pointBackgroundColor: "rgba(78, 115, 223, 1)",
+//             pointBorderColor: "rgba(78, 115, 223, 1)",
+//             pointHoverRadius: 3,
+//             pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+//             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+//             pointHitRadius: 5,
+//             pointBorderWidth: 2,
+//             data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100],
+//           },
+//         ],
+//       },
+//       chartOptions: {
+//         maintainAspectRatio: false,
+//         layout: {
+//           padding: {
+//             left: 10,
+//             right: 25,
+//             top: 25,
+//             bottom: 0,
+//           },
+//         },
+//         scales: {
+//           xAxes: [
+//             {
+//               time: {
+//                 unit: "date",
+//               },
+//               gridLines: {
+//                 display: false,
+//                 drawBorder: false,
+//               },
+//               ticks: {
+//                 maxTicksLimit: 7,
+//               },
+//             },
+//           ],
+//           yAxes: [
+//             {
+//               ticks: {
+//                 maxTicksLimit: 5,
+//                 padding: 10,
+//                 // Include a dollar sign in the ticks
+//                 callback: function (value, index, values) {
+//                   return number_format(value) + "°C";
+//                 },
+//               },
+//               gridLines: {
+//                 color: "rgb(234, 236, 244)",
+//                 zeroLineColor: "rgb(234, 236, 244)",
+//                 drawBorder: false,
+//                 borderDash: [2],
+//                 zeroLineBorderDash: [2],
+//               },
+//             },
+//           ],
+//         },
+//         legend: {
+//           display: false,
+//         },
+//         tooltips: {
+//           backgroundColor: "rgb(255,255,255)",
+//           bodyFontColor: "#858796",
+//           titleMarginBottom: 10,
+//           titleFontColor: "#6e707e",
+//           titleFontSize: 14,
+//           borderColor: "#dddfeb",
+//           borderWidth: 1,
+//           xPadding: 15,
+//           yPadding: 15,
+//           displayColors: false,
+//           intersect: false,
+//           mode: "index",
+//           caretPadding: 10,
+//           callbacks: {
+//             label: function (tooltipItem, chart) {
+//               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
+//               return datasetLabel + ": °C" + number_format(tooltipItem.yLabel);
+//             },
+//           },
+//         },
+//       },
+//     };
+//   },
 
   methods: {},
 }
@@ -249,24 +239,25 @@ export default {
 <template>
 <BreezeAuthenticatedLayout>
     <div>
-<div class="card" v-for="(item, i) in [0,1,2,]">
+    <div class="card">
       <div class="card__header">
         <div class="card__header-title">BRANCH A</div>
       </div>
       <div class="card__main">
         <div class="card__row">
           <div class="user-card"  >
-            <div class="card-body">
+            <div class="card-body" >
             <div class="chart-area">
 
-              <canvas id="myAreaChart" ref="chart"></canvas>
+              <canvas id="myAreaChart" ref="chart" ></canvas>
             </div>
           </div>
             <div class="user-card__info">
 
- 
+
             </div>
           </div>
+
         </div>
       </div>
     </div>

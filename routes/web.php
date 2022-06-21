@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Branch;
+use App\Models\Temperature;
 use App\Models\Report;
 use App\Models\Employee;
 use Illuminate\Foundation\Application;
@@ -28,7 +29,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard',['branches' => Branch::all(),'employees'=>Employee::all(),'reports' => Report::all()]);
+    return Inertia::render('Dashboard',['branches' => Branch::all(),'employees'=>Employee::all(),'reports' => Report::all(), 'temperatures'=>Temperature::all()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
