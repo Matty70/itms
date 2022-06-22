@@ -24,3 +24,4 @@ Route::get('temperatures/',['uses' => 'App\Http\Controllers\TemperatureControlle
 Route::post('auth',['uses' => 'App\Http\Controllers\AuthController@login']);
 
 Route::delete('branch/{branchId}',['uses' => 'App\Http\Controllers\BranchController@deleteBranch']);
+Route::delete('employee/{employeeId}',['uses' => 'App\Http\Controllers\EmployeeController@deleteEmployee']);
