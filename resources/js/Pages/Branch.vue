@@ -2,6 +2,7 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeValidationErrors from "@/Components/ValidationErrors.vue";
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
   components: {
@@ -21,6 +22,7 @@ export default {
         name: "",
         location: "",
       }),
+      branch: {}
     };
   },
 
@@ -32,20 +34,25 @@ export default {
             this.$bvModal.hide("addBranchModal");
           }),
       });
+      },
+
+      deleteB(branch) {
+          this.branch = branch;
     },
 
     deleteBranch() {
       console.log("mmmm");
-      var button = $(Event.relatedTarget); // Button that triggered the modal
-      var branch = button.data("branch"); // Extract info from data-* attributes
-      // // var branch_ = button.data('user_name')
-      console.log(branch);
-    //   this.form.delete(route("branch.delete", branch), {
-    //     onFinish: () =>
-    //       this.$nextTick(() => {
-    //         this.$bvModal.hide("deleteBranch");
-    //       }),
-    //   });
+        console.log(this.branch);
+        // Inertia.delete(route("branch.delete", this.branch.id));
+        this.form.delete(route("branch.delete", this.branch.id), {
+         onFinish: () => {
+            this.$nextTick(() => {
+                this.$bvModal.hide("deleteBranch");
+          })
+            },
+
+      });
+
     },
     edit() {
       console.log("edit");
@@ -116,8 +123,8 @@ export default {
                 <a
                   href="#deleteBranchModal"
                   class="delete"
-                  data-branch="{{branch}}"
                   data-toggle="modal"
+                  @click="deleteB(branch)"
                   ><i class="material-icons" data-toggle="tooltip" title="Delete"
                     >&#xE872;</i
                   ></a

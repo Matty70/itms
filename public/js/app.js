@@ -15406,6 +15406,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/Authenticated.vue */ "./resources/js/Layouts/Authenticated.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _Components_ValidationErrors_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/ValidationErrors.vue */ "./resources/js/Components/ValidationErrors.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
 
 
 
@@ -15424,7 +15426,8 @@ __webpack_require__.r(__webpack_exports__);
       form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
         name: "",
         location: ""
-      })
+      }),
+      branch: {}
     };
   },
   methods: {
@@ -15439,30 +15442,33 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    deleteB: function deleteB(branch) {
+      this.branch = branch;
+    },
     deleteBranch: function deleteBranch() {
+      var _this2 = this;
+
       console.log("mmmm");
-      var button = $(Event.relatedTarget); // Button that triggered the modal
+      console.log(this.branch); // Inertia.delete(route("branch.delete", this.branch.id));
 
-      var branch = button.data("branch"); // Extract info from data-* attributes
-      // // var branch_ = button.data('user_name')
-
-      console.log(branch); //   this.form.delete(route("branch.delete", branch), {
-      //     onFinish: () =>
-      //       this.$nextTick(() => {
-      //         this.$bvModal.hide("deleteBranch");
-      //       }),
-      //   });
+      this.form["delete"](route("branch.delete", this.branch.id), {
+        onFinish: function onFinish() {
+          _this2.$nextTick(function () {
+            _this2.$bvModal.hide("deleteBranch");
+          });
+        }
+      });
     },
     edit: function edit() {
-      var _this2 = this;
+      var _this3 = this;
 
       console.log("edit");
       var button = $(event.relatedTarget);
       var branch = button.data("branch");
       this.form(route("view.branch", $branchId), {
         onFinish: function onFinish() {
-          return _this2.$nextTick(function () {
-            _this2.$bvModal.hide("editBranchModal");
+          return _this3.$nextTick(function () {
+            _this3.$bvModal.hide("editBranchModal");
           });
         }
       });
@@ -15817,7 +15823,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.myLineChart = new chart_js__WEBPACK_IMPORTED_MODULE_3__.Chart(this.$refs.chart, {
       type: "line",
       data: {
-        labels: [,],
+        labels: ["0 Mins", "30 Mins", "1 Hrs", "1.5 Hrs.", "2 Hrs", "2.5 Hrs", "3 Hrs", "3.5 Hrs", "4 Hrs", "4.5 Hrs", "5 Hrs", "5.5 Hrs"],
         datasets: [{
           label: "Centigrade",
           lineTension: 0.3,
@@ -15831,7 +15837,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 2,
-          data: []
+          data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100]
         }]
       },
       options: {
@@ -15902,114 +15908,95 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     }); // this.renderChart(myLineChart.data, myLineChart.options);
   },
-  //   data() {
-  //     return {
-  //       myLineChart: {},
-  //       chartData: {
-  //         labels: [
-  //           "0 Mins",
-  //           "30 Mins",
-  //           "1 Hrs",
-  //           "1.5 Hrs.",
-  //           "2 Hrs",
-  //           "2.5 Hrs",
-  //           "3 Hrs",
-  //           "3.5 Hrs",
-  //           "4 Hrs",
-  //           "4.5 Hrs",
-  //           "5 Hrs",
-  //           "5.5 Hrs",
-  //         ],
-  //         datasets: [
-  //           {
-  //             label: "Centigrade",
-  //             lineTension: 0.3,
-  //             backgroundColor: "rgba(78, 115, 223, 0.05)",
-  //             borderColor: "rgba(78, 115, 223, 1)",
-  //             pointRadius: 3,
-  //             pointBackgroundColor: "rgba(78, 115, 223, 1)",
-  //             pointBorderColor: "rgba(78, 115, 223, 1)",
-  //             pointHoverRadius: 3,
-  //             pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-  //             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-  //             pointHitRadius: 5,
-  //             pointBorderWidth: 2,
-  //             data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100],
-  //           },
-  //         ],
-  //       },
-  //       chartOptions: {
-  //         maintainAspectRatio: false,
-  //         layout: {
-  //           padding: {
-  //             left: 10,
-  //             right: 25,
-  //             top: 25,
-  //             bottom: 0,
-  //           },
-  //         },
-  //         scales: {
-  //           xAxes: [
-  //             {
-  //               time: {
-  //                 unit: "date",
-  //               },
-  //               gridLines: {
-  //                 display: false,
-  //                 drawBorder: false,
-  //               },
-  //               ticks: {
-  //                 maxTicksLimit: 7,
-  //               },
-  //             },
-  //           ],
-  //           yAxes: [
-  //             {
-  //               ticks: {
-  //                 maxTicksLimit: 5,
-  //                 padding: 10,
-  //                 // Include a dollar sign in the ticks
-  //                 callback: function (value, index, values) {
-  //                   return number_format(value) + "°C";
-  //                 },
-  //               },
-  //               gridLines: {
-  //                 color: "rgb(234, 236, 244)",
-  //                 zeroLineColor: "rgb(234, 236, 244)",
-  //                 drawBorder: false,
-  //                 borderDash: [2],
-  //                 zeroLineBorderDash: [2],
-  //               },
-  //             },
-  //           ],
-  //         },
-  //         legend: {
-  //           display: false,
-  //         },
-  //         tooltips: {
-  //           backgroundColor: "rgb(255,255,255)",
-  //           bodyFontColor: "#858796",
-  //           titleMarginBottom: 10,
-  //           titleFontColor: "#6e707e",
-  //           titleFontSize: 14,
-  //           borderColor: "#dddfeb",
-  //           borderWidth: 1,
-  //           xPadding: 15,
-  //           yPadding: 15,
-  //           displayColors: false,
-  //           intersect: false,
-  //           mode: "index",
-  //           caretPadding: 10,
-  //           callbacks: {
-  //             label: function (tooltipItem, chart) {
-  //               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
-  //               return datasetLabel + ": °C" + number_format(tooltipItem.yLabel);
-  //             },
-  //           },
-  //         },
-  //       },
-  //     };
-  //   },
+  data: function data() {
+    return {
+      myLineChart: {},
+      chartData: {
+        labels: ["0 Mins", "30 Mins", "1 Hrs", "1.5 Hrs.", "2 Hrs", "2.5 Hrs", "3 Hrs", "3.5 Hrs", "4 Hrs", "4.5 Hrs", "5 Hrs", "5.5 Hrs"],
+        datasets: [{
+          label: "Centigrade",
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 2,
+          data: [0, 10, 20, 30, 40, 50, 50, 55, 40, 90, 100]
+        }]
+      },
+      chartOptions: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: "date"
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function callback(value, index, values) {
+                return number_format(value) + "°C";
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: "#6e707e",
+          titleFontSize: 14,
+          borderColor: "#dddfeb",
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: "index",
+          caretPadding: 10,
+          callbacks: {
+            label: function label(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
+              return datasetLabel + ": °C" + number_format(tooltipItem.yLabel);
+            }
+          }
+        }
+      }
+    };
+  },
   methods: {}
 });
 
@@ -17552,7 +17539,7 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "#editBranchModal",
   "class": "edit",
   "data-toggle": "modal"
@@ -17560,20 +17547,23 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "material-icons",
   "data-toggle": "tooltip",
   title: "Edit"
-}, "")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "#deleteBranchModal",
-  "class": "delete",
-  "data-branch": "{{branch}}",
-  "data-toggle": "modal"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "material-icons",
-  "data-toggle": "tooltip",
-  title: "Delete"
-}, "")])], -1
+}, "")], -1
 /* HOISTED */
 );
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_8 = ["onClick"];
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "material-icons",
+  "data-toggle": "tooltip",
+  title: "Delete"
+}, "", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = [_hoisted_9];
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "clearfix"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "hint-text"
@@ -17597,18 +17587,18 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_9 = {
+var _hoisted_12 = {
   id: "addBranchModal",
   "class": "modal fade"
 };
-var _hoisted_10 = {
+var _hoisted_13 = {
   "class": "modal-dialog"
 };
-var _hoisted_11 = {
+var _hoisted_14 = {
   "class": "modal-content"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "modal-header"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
   "class": "modal-title"
@@ -17621,30 +17611,30 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_16 = {
   "class": "modal-body"
 };
-var _hoisted_14 = {
+var _hoisted_17 = {
   "class": "form-group"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Branch Name", -1
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Branch Name", -1
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_19 = {
   "class": "form-group"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Location", -1
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Location", -1
 /* HOISTED */
 );
 
-var _hoisted_18 = {
+var _hoisted_21 = {
   "class": "modal-footer"
 };
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "button",
   "class": "btn btn-default",
   "data-dismiss": "modal",
@@ -17653,18 +17643,18 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_20 = {
+var _hoisted_23 = {
   id: "editBranchModal",
   "class": "modal fade"
 };
-var _hoisted_21 = {
+var _hoisted_24 = {
   "class": "modal-dialog"
 };
-var _hoisted_22 = {
+var _hoisted_25 = {
   "class": "modal-content"
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "modal-header"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
   "class": "modal-title"
@@ -17677,26 +17667,26 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_24 = {
+var _hoisted_27 = {
   "class": "modal-body"
 };
-var _hoisted_25 = {
+var _hoisted_28 = {
   "class": "form-group"
 };
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Branch Name", -1
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Branch Name", -1
 /* HOISTED */
 );
 
-var _hoisted_27 = {
+var _hoisted_30 = {
   "class": "form-group"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Location", -1
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Location", -1
 /* HOISTED */
 );
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "modal-footer"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "button",
@@ -17711,18 +17701,18 @@ var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_30 = {
+var _hoisted_33 = {
   id: "deleteBranchModal",
   "class": "modal fade"
 };
-var _hoisted_31 = {
+var _hoisted_34 = {
   "class": "modal-dialog"
 };
-var _hoisted_32 = {
+var _hoisted_35 = {
   "class": "modal-content"
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "modal-header"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
   "class": "modal-title"
@@ -17735,7 +17725,7 @@ var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "modal-body"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Are you sure you want to delete these Records?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-warning"
@@ -17743,7 +17733,7 @@ var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "modal-footer"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "button",
@@ -17758,7 +17748,7 @@ var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_36 = [_hoisted_33, _hoisted_34, _hoisted_35];
+var _hoisted_39 = [_hoisted_36, _hoisted_37, _hoisted_38];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -17775,16 +17765,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(branch.location), 1
         /* TEXT */
-        ), _hoisted_7]);
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+          href: "#deleteBranchModal",
+          "class": "delete",
+          "data-toggle": "modal",
+          onClick: function onClick($event) {
+            return $options.deleteB(branch);
+          }
+        }, _hoisted_10, 8
+        /* PROPS */
+        , _hoisted_8)])]);
       }), 256
       /* UNKEYED_FRAGMENT */
-      ))])]), _hoisted_8]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add Modal HTML "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeValidationErrors, {
+      ))])]), _hoisted_11]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add Modal HTML "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeValidationErrors, {
         "class": "mb-4"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.submit && $options.submit.apply($options, arguments);
         }, ["prevent"]))
-      }, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control",
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -17793,7 +17792,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         required: ""
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
         "class": "form-control",
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.form.location = $event;
@@ -17801,7 +17800,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         required: ""
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.location]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.location]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "submit",
         "class": "btn btn-success",
         value: "Add",
@@ -17811,11 +17810,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "data-dismiss": "modal"
       })])], 32
       /* HYDRATE_EVENTS */
-      )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Edit Modal HTML "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+      )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Edit Modal HTML "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.edit && $options.edit.apply($options, arguments);
         }, ["prevent"]))
-      }, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control",
         required: "",
@@ -17824,7 +17823,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
         "class": "form-control",
         required: "",
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
@@ -17832,13 +17831,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.location]])])]), _hoisted_29], 32
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.location]])])]), _hoisted_32], 32
       /* HYDRATE_EVENTS */
-      )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete Modal HTML "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+      )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete Modal HTML "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.deleteBranch && $options.deleteBranch.apply($options, arguments);
         }, ["prevent"]))
-      }, _hoisted_36, 32
+      }, _hoisted_39, 32
       /* HYDRATE_EVENTS */
       )])])])])];
     }),
@@ -18551,11 +18550,49 @@ var _hoisted_7 = {
   "class": "chart-area"
 };
 var _hoisted_8 = {
-  id: "myAreaChart",
+  id: "myAreaChart1",
   ref: "chart"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "user-card__info"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
+  "class": "card"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card__header"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card__header-title"
+}, "BRANCH B")], -1
+/* HOISTED */
+);
+
+var _hoisted_12 = {
+  "class": "card__main"
+};
+var _hoisted_13 = {
+  "class": "card__row"
+};
+var _hoisted_14 = {
+  "class": "user-card"
+};
+var _hoisted_15 = {
+  "class": "card-body"
+};
+var _hoisted_16 = {
+  "class": "chart-area"
+};
+var _hoisted_17 = {
+  id: "myAreaChart",
+  ref: "chart"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "user-card__info"
 }, null, -1
 /* HOISTED */
@@ -18568,7 +18605,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("canvas", _hoisted_8, null, 512
       /* NEED_PATCH */
-      )])]), _hoisted_9])])])])])];
+      )])]), _hoisted_9])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("canvas", _hoisted_17, null, 512
+      /* NEED_PATCH */
+      )])]), _hoisted_18])])])])])];
     }),
     _: 1
     /* STABLE */
