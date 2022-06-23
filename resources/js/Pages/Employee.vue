@@ -39,8 +39,20 @@ export default {
             });
         },
 
-            deleteE(employee) {
+        deleteE(employee) {
         this.employee = employee;
+    },
+
+  editE(employee) {
+        this.employee = employee;
+        this.form.employee.name = employee.name;
+        this.form.employee.email = employee.email;
+        this.form.employee.gender = employee.gender;
+        this.form.employee.age = employee.age;
+        this.form.employee.branch = employee.branch;
+        this.form.employee.phone = employee.email;
+
+
     },
 
     deleteEmployee() {
@@ -50,7 +62,19 @@ export default {
         this.form.delete(route("employee.delete", this.employee.id), {
             onFinish: () => {
                 this.$nextTick(() => {
-                    this.$bvModal.hide("deleteEmployee");
+                    this.$bvModal.hide("deleteEmployeeModal");
+                });
+            },
+        });
+        },
+    editEmployee() {
+        console.log("mmmm");
+        console.log(this.employee);
+        // Inertia.delete(route("branch.delete", this.branch.id));
+        this.form.put(route("view.employee", this.employee.id), {
+            onFinish: () => {
+                this.$nextTick(() => {
+                    this.$bvModal.hide("editEmployeeModal");
                 });
             },
         });
@@ -282,6 +306,7 @@ export default {
                                 <input
                                     type="text"
                                     class="form-control"
+                                    v-model="employee.name"
                                     required
                                 />
                             </div>
@@ -290,6 +315,7 @@ export default {
                                 <input
                                     type="email"
                                     class="form-control"
+                                    v-model="employee.email"
                                     required
                                 />
                             </div>
@@ -298,6 +324,7 @@ export default {
                                 <input
                                     type="text"
                                     class="form-control"
+                                    v-model="employee.name"
                                     required
                                 />
                             </div>
@@ -379,6 +406,8 @@ export default {
                                 type="submit"
                                 class="btn btn-danger"
                                 value="Delete"
+                                @click="deleteEmployee"
+                                data-dismiss="modal"
                             />
                         </div>
                     </form>
