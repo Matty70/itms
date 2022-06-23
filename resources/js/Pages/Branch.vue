@@ -38,6 +38,16 @@ export default {
 
       deleteB(branch) {
           this.branch = branch;
+
+
+      },
+
+    editB(branch) {
+        this.branch = branch;
+        this.form.branch.name = branch.name;
+        this.form.branch.location = branch.location;
+
+
     },
 
     deleteBranch() {
@@ -47,23 +57,27 @@ export default {
         this.form.delete(route("branch.delete", this.branch.id), {
          onFinish: () => {
             this.$nextTick(() => {
-                this.$bvModal.hide("deleteBranch");
+                this.$bvModal.hide("deleteBranchModal");
           })
             },
 
       });
 
     },
-    edit() {
-      console.log("edit");
-      var button = $(event.relatedTarget);
-      var branch = button.data("branch");
-      this.form(route("view.branch", $branchId), {
-        onFinish: () =>
-          this.$nextTick(() => {
-            this.$bvModal.hide("editBranchModal");
-          }),
+
+    editBranch() {
+      console.log("mmmm");
+        console.log(this.branch);
+        // Inertia.delete(route("branch.delete", this.branch.id));
+        this.form.put(route("view.branch", this.branch.id), {
+         onFinish: () => {
+            this.$nextTick(() => {
+                this.$bvModal.hide("editBranch");
+          })
+            },
+
       });
+
     },
   },
 };
@@ -115,7 +129,7 @@ export default {
 
               <td>{{ branch.location }}</td>
               <td>
-                <a href="#editBranchModal" class="edit" data-toggle="modal"
+                <a href="#editBranchModal" class="edit" data-toggle="modal" @click="editB(branch)"
                   ><i class="material-icons" data-toggle="tooltip" title="Edit"
                     >&#xE254;</i
                   ></a
@@ -204,7 +218,7 @@ export default {
       <div id="editBranchModal" class="modal fade">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form @submit.prevent="edit">
+            <form @submit.prevent="editBranch">
               <div class="modal-header">
                 <h4 class="modal-title">Edit Branch</h4>
                 <button
@@ -219,7 +233,7 @@ export default {
               <div class="modal-body">
                 <div class="form-group">
                   <label>Branch Name</label>
-                  <input type="text" class="form-control" required v-model="form.name" />
+                  <input type="text" class="form-control" required v-model="branch.name" />
                 </div>
 
                 <div class="form-group">
@@ -227,7 +241,7 @@ export default {
                   <textarea
                     class="form-control"
                     required
-                    v-model="form.location"
+                    v-model="branch.location"
                   ></textarea>
                 </div>
               </div>
@@ -238,7 +252,7 @@ export default {
                   data-dismiss="modal"
                   value="Cancel"
                 />
-                <input type="submit" class="btn btn-info" value="Save" />
+                <input type="submit" @click="editB" data-dismiss="modal" class="btn btn-info" value="Save" />
               </div>
             </form>
           </div>
@@ -277,6 +291,8 @@ export default {
                   type="submit"
                   class="btn btn-danger"
                   value="Delete"
+                  @click="deleteBranch"
+                  data-dismiss="modal"
 
                 />
               </div>

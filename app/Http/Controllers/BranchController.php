@@ -42,43 +42,26 @@ class BranchController extends Controller
         return response()->json(['branch' => $branch], 200);
     }
 
-    // public function postGrade(Request $request)
-    // {
 
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required',
-    //     ]);
-
-    //     if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
-
-
-    //     $grade = new Grade();
-
-    //     $grade->name = $request->input('name');
-
-    //     $grade->save();
-
-    //     return  response()->json(['grade' => $grade], 201);
-    // }
 
     public function putBranch(Request $request, $branchId)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'location' => 'location',
+            'location' => 'required',
         ]);
 
         if ($validator->fails()) return response()->json(['errors' => $validator->errors(),], 404);
 
         $branch = Branch::find($branchId);
-        if (!$branch) return response()->json(['error' => 'Branch not found'], 404);
+        if (!$branch) return response()->message(['error' => 'Branch not found'], 404);
 
         $branch->update([
             'name' => $request->input('name'),
             'location' => $request->input('location')
         ]);
 
-        return response()->json(['branch' => $branch], 201);
+        return redirect()->back();
     }
 
     public function deleteBranch($branchId)
@@ -87,7 +70,7 @@ class BranchController extends Controller
         if (!$branch) return response()->json(['error' => 'Branch not found'], 404);
 
         $branch->delete();
-       return response()->json(['message' => 'Branch deleted Successfully'], 201);
+       return redirect()->back();
     }
 
     public function viewBranches(){

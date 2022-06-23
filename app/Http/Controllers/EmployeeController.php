@@ -84,7 +84,7 @@ class EmployeeController extends Controller
 
         ]);
 
-        return response()->json(['employee' => $employee], 201);
+        return  redirect()->back();
     }
 
     public function deleteEmployee($employeeId)
@@ -93,7 +93,7 @@ class EmployeeController extends Controller
         if (!$employeeId) return response()->json(['error' => 'Employee not found'], 404);
 
         $employee->delete();
-       return response()->json(['message' => 'Employee deleted Successfully'], 201);
+       return  redirect()->back();
     }
 
     public function showEmployees(){

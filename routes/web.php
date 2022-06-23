@@ -37,13 +37,13 @@ require __DIR__.'/auth.php';
 Route::get('/employee', 'App\Http\Controllers\EmployeeController@getAllEmployees');
 Route::get('/show', 'App\Http\Controllers\EmployeeController@showEmployees');
 Route::Post('/create/employee', 'App\Http\Controllers\EmployeeController@postEmployee' )->name('create.employee');
-Route::put('/create/employee/{employeeId}', 'App\Http\Controllers\EmployeeController@createEmployee')->name('view.employee');
+Route::put('/create/employee/{employeeId}', 'App\Http\Controllers\EmployeeController@putEmployee')->name('view.employee');
 Route::delete('/delete/employee/{employeeId}','App\Http\Controllers\EmployeeController@deleteEmployee')->name('employee.delete');
 
 Route::get('/branch', 'App\Http\Controllers\BranchController@getAllBranches')->middleware(['auth', 'verified']);
 Route::get('/view', 'App\Http\Controllers\BranchController@viewBranches')->middleware(['auth', 'verified']);
 Route::Post('/branch', 'App\Http\Controllers\BranchController@store' )->name('branch.store');
-Route::put('/create/branch/{branchId}', 'App\Http\Controllers\BranchController@createBranch')->name('view.branch');
+Route::put('/create/branch/{branchId}', 'App\Http\Controllers\BranchController@putBranch')->name('view.branch');
 Route::delete('/delete/branch/{branchId}','App\Http\Controllers\BranchController@deleteBranch')->name('branch.delete');
 
 Route::get('/reports', 'App\Http\Controllers\ReportController@showReports');
